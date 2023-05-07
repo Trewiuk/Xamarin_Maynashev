@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SqliteTaratorki.ViewModels" xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry"
+             x:Class="SqliteTaratorki.Views.AddPersonalPage"
+             Title="Добавление сотрудника">
+    <ContentPage.BindingContext>
+        <local:AddPersonalViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+        <StackLayout Spacing="-5" Padding="15">
+
+            <Label Text="Фамилия" FontSize="Medium"/>
+            <Entry Text="{Binding PersonalInfo.PersonalSurname,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Имя" FontSize="Medium"/>
+            <Entry Text="{Binding PersonalInfo.PersonalName,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Отчество" FontSize="Medium"/>
+            <Entry Text="{Binding PersonalInfo.PersonalMiddlename,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Номер телефона" FontSize="Medium"/>
+            <control:MaskedEntry Mask="+7(XXX)XXX-XX-XX" Placeholder="+7" Text="{Binding PersonalInfo.PersonalPhone,Mode=TwoWay}"/>
+
+            <Label Text="Стаж (лет)" FontSize="Medium"/>
+            <Picker x:Name="experiencePicker"
+                    Title="Укажите стаж работы" TitleColor="{StaticResource Primary}"
+                    SelectedItem="{Binding PersonalInfo.PersonalExperience}">
+                <Picker.Items>
+                    <x:String>1 год</x:String>
+                    <x:String>2 года</x:String>
+                    <x:String>3 года</x:String>
+                    <x:String>4 года</x:String>
+                    <x:String>5 лет</x:String>
+                    <x:String>6 лет</x:String>
+                    <x:String>7 лет</x:String>
+                    <x:String>8 лет</x:String>
+                    <x:String>9 лет</x:String>
+                    <x:String>10 лет</x:String>
+                    <x:String>11 лет</x:String>
+                    <x:String>12 лет</x:String>
+                    <x:String>13 лет</x:String>
+                    <x:String>14 лет</x:String>
+                    <x:String>15 лет</x:String>
+                    <x:String>16 лет</x:String>
+                    <x:String>17 лет</x:String>
+                    <x:String>18 лет</x:String>
+                    <x:String>19 лет</x:String>
+                    <x:String>20 лет</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label Text="Образование" FontSize="Medium"/>
+            <Picker x:Name="educationPicker"
+                    Title="Укажите образование" TitleColor="{StaticResource Primary}"
+                    SelectedItem="{Binding PersonalInfo.PersonalEducation}">
+                <Picker.Items>
+                    <x:String>Высшее</x:String>
+                    <x:String>Высшее неполное</x:String>
+                    <x:String>Среднее специальное</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Классификация" FontSize="Medium"/>
+            <Picker x:Name="classificationPicker"
+                    Title="Укажите классификацию" TitleColor="{StaticResource Primary}"
+                    SelectedItem="{Binding PersonalInfo.PersonalClassification}">
+                <Picker.Items>
+                    <x:String>Логопед-дефектолог</x:String>
+                    <x:String>Нейропсихолог</x:String>
+                </Picker.Items>
+            </Picker>
+
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <Button Text="Назад" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+                <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

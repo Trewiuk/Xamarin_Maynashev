@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SqliteTaratorki.ViewModels"
+             x:Class="SqliteTaratorki.Views.AddCabinetPage"
+             Title="Добавление кабинета">
+
+    <ContentPage.BindingContext>
+        <local:AddCabinetViewModel/>
+    </ContentPage.BindingContext>
+
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="0" Padding="15">
+            
+            <Label Text="Название кабинета" FontSize="Medium"/>
+            <Entry Text="{Binding CabinetInfo.CabinetName,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Описание" FontSize="Medium"/>
+            <Editor Text="{Binding CabinetInfo.Description,Mode=TwoWay}" FontSize="Medium"/>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <Button Text="Назад" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+                <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

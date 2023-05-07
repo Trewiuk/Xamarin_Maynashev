@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SqliteTaratorki.ViewModels"
+             xmlns:model="clr-namespace:SqliteTaratorki.Models"
+             x:Class="SqliteTaratorki.Views.CabinetPage"
+             Title="Кабинеты">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_add.png" Text="Добавить" Command="{Binding AddCabinetCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView x:DataType="local:CabinetViewModel"
+                         Command="{Binding LoadCabinetCommand}"
+                         IsRefreshing="{Binding IsBusy,Mode=OneWay}">
+                <CollectionView
+                    ItemsSource="{Binding CabinetInfos}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="model:CabinetInfo">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            
+                                                <SwipeItem IconImageSource="icon_corzina" BackgroundColor="OrangeRed" Command="{Binding Source={RelativeSource AncestorType={x:Type local:CabinetViewModel}},
+            Path=CabinetTappedDelete}" CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid Padding="5">
+                                        <Frame CornerRadius="10" HasShadow="True" BorderColor="LightGray">
+                                            <StackLayout Orientation="Horizontal">
+                                                <StackLayout>
+                                                    <Label Grid.Column="1" Text="{Binding CabinetName}"  FontAttributes="Bold,Italic" TextColor="Black"/>
+                                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}"  VerticalOptions="End"/>
+
+                                                </StackLayout>
+
+                                                <StackLayout.GestureRecognizers>
+
+
+                                                    <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type local:CabinetViewModel}},
+                                                            Path=CabinetTappedEdit}" CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+
+
+                                                </StackLayout.GestureRecognizers>
+
+                                            </StackLayout>
+                                        </Frame>
+
+
+                                    </Grid>
+                                </SwipeView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

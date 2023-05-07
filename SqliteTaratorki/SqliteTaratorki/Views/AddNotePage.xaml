@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SqliteTaratorki.ViewModels" xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry"
+             x:Class="SqliteTaratorki.Views.AddNotePage"
+             Title="Добавление записи занятия">
+    <ContentPage.BindingContext>
+        <local:AddNoteViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+        <StackLayout Spacing="-5" Padding="15">
+
+            <Label Text="Дата" FontSize="Medium"/>
+            <control:MaskedEntry Mask="XX.XX.XXXX" Placeholder="__.__.____" Text="{Binding NoteInfo.NoteDate,Mode=TwoWay}" FontSize="Medium"/>
+
+            <Label Text="Время" FontSize="Medium"/>
+            <control:MaskedEntry Mask="XX:XX" Placeholder="00:00" Text="{Binding NoteInfo.NoteTime,Mode=TwoWay}" FontSize="Medium"/>
+            
+                <Label Text="Клиент" FontSize="Medium"/>
+            <Picker x:Name="clientPicker"
+                    Title="Выберите клиента" TitleColor="{StaticResource Primary}"
+                    SelectedItem="{Binding NoteInfo.NoteClient}"
+                    >
+                
+            </Picker>
+            
+            <Label Text="Услуга" FontSize="Medium"/>
+            <Entry Text="{Binding NoteInfo.NoteYsluga,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Кабинет" FontSize="Medium"/>
+            <Entry Text="{Binding NoteInfo.NoteCabinet,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Сотрудник" FontSize="Medium"/>
+            <Entry Text="{Binding NoteInfo.NotePersonal,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Статус проведения" FontSize="Medium"/>
+            <Picker x:Name="actionPicker"
+                    Title="Выберите" TitleColor="{StaticResource Primary}"
+                    SelectedItem="{Binding NoteInfo.NoteAction}">
+                <Picker.Items>
+                    <x:String>Проведено</x:String>
+                    <x:String>Не проведено</x:String>
+                    <x:String>В ожидании</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <Button Text="Назад" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+                <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SqliteTaratorki.ViewModels"
+             xmlns:model="clr-namespace:SqliteTaratorki.Models"
+             x:Class="SqliteTaratorki.Views.PersonalPage"
+             Title="Сотрудники">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_add.png" Text="Добавить" Command="{Binding AddPersonalCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <RefreshView x:DataType="local:PersonalViewModel"
+                         Command="{Binding LoadPersonalCommand}"
+                         IsRefreshing="{Binding IsBusy,Mode=OneWay}">
+                <CollectionView
+                    ItemsSource="{Binding PersonalInfos}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="model:PersonalInfo">
+                                <SwipeView>
+                                    <SwipeView.RightItems>
+                                        <SwipeItems>
+                                            <SwipeItem IconImageSource="icon_corzina" BackgroundColor="OrangeRed" Command="{Binding Source={RelativeSource AncestorType={x:Type local:PersonalViewModel}},
+            Path=PersonalTappedDelete}" CommandParameter="{Binding .}"/>
+                                        </SwipeItems>
+                                    </SwipeView.RightItems>
+                                    <Grid Padding="5">
+                                        <Frame CornerRadius="10" HasShadow="True" BorderColor="LightGray">
+                                            <StackLayout>
+                                               
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Label Text="{Binding PersonalSurname}" FontAttributes="Italic,Bold" TextColor="Black"/>
+                                                    <Label Text="{Binding PersonalName}" VerticalOptions="End" FontAttributes="Italic,Bold" TextColor="Black"/>
+                                                    <Label Text="{Binding PersonalMiddlename}" VerticalOptions="End" FontAttributes="Italic,Bold" TextColor="Black"/>
+                                                </StackLayout>
+
+                                                <Label  Text="{Binding PersonalClassification}" VerticalOptions="End" TextColor="{StaticResource Primary}"/>
+                                                <Label  Text="{Binding PersonalPhone}" VerticalOptions="End" TextColor="Black"/>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                              Command="{Binding Source={RelativeSource AncestorType={x:Type local:PersonalViewModel}},
+                                                            Path=PersonalTappedEdit}" CommandParameter="{Binding .}">
+                                                    </TapGestureRecognizer>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </SwipeView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

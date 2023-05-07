@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SqliteTaratorki.ViewModels" xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry"
+             x:Class="SqliteTaratorki.Views.AddClientPage"
+             Title="Добавление клиента">
+    <ContentPage.BindingContext>
+        <local:AddClientViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+        <StackLayout Spacing="-5" Padding="15">
+
+            <Label Text="Фамилия" FontSize="Medium"/>
+            <Entry Text="{Binding ClientInfo.ClientSurname,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Имя" FontSize="Medium"/>
+            <Entry Text="{Binding ClientInfo.ClientName,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Отчество" FontSize="Medium"/>
+            <Entry Text="{Binding ClientInfo.ClientMiddlename,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Дата рождения" FontSize="Medium"/>
+            <control:MaskedEntry Mask="XX.XX.XXXX" Placeholder="__.__.____" Text="{Binding ClientInfo.ClientBirthday,Mode=TwoWay}" FontSize="Medium"/>
+            <Label Text="Картинка URL" FontSize="Medium"/>
+            <Picker x:Name="imagePicker"
+                    Title="Выбор картинки" TitleColor="{StaticResource Primary}"
+                    SelectedItem="{Binding ClientInfo.ClientImage}">
+                <Picker.Items>
+                    <x:String>boy.png</x:String>
+                    <x:String>girl.png</x:String>
+                    
+                </Picker.Items>
+
+
+            </Picker>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <Button Text="Назад" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+                <Button Text="Сохранить" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" CornerRadius="10"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
